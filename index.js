@@ -42,6 +42,16 @@ async function run() {
             res.send(result);
         });
 
+        app.delete('/delete-project/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+
+            const result = await projectCollection.findOneAndDelete(query);
+            res.status(200).json({
+                success: "project deleted Successfully"
+            }).send(result);
+        })
+
 
         app.post('/add-experiences', async (req, res) => {
             const data = req.body;
