@@ -73,6 +73,16 @@ async function run() {
             res.send(result);
         });
 
+        app.delete('/delete-experience/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+
+            const result = await experienceCollection.findOneAndDelete(query);
+            res.status(200).json({
+                success: "Experience deleted Successfully"
+            }).send(result);
+        })
+
         app.get('/', async (req, res) => {
             res.send('application running Successfully');
         })
